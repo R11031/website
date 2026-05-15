@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Primary Meta Tags -->
+  <!-- TODO: Replace with your paper title and author names -->
+  <meta name="title" content="GemDepth: Geometry-Embedded Features for 3D-Consistent Video Depth - Yuecheng Liu, Junda Cheng, Longliang Liu, Wenjing Liao, Hanrui Cheng, Yuzhou Wang, Xin Yang">
+  <!-- TODO: Write a compelling 150-160 character description of your research -->
+  <meta name="description" content="GemDepth is a framework built on the insight that an explicit awareness of camera motion and global 3D structure is a prerequisite for 3D consistency.">
+  <!-- TODO: Add 5-10 relevant keywords for your research area -->
+  <meta name="keywords" content="video depth estimation, monocular depth estimation, 3D reconstruction">
+  <!-- TODO: List all authors -->
+  <meta name="author" content="Yuecheng Liu, Junda Cheng">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <!-- TODO: Replace with your institution or lab name -->
+  <meta property="og:site_name" content="Hust, Carizon, Optics Valley Laboratory">
+  <!-- TODO: Same as paper title above -->
+  <meta property="og:title" content="GemDepth: Geometry-Embedded Features for 3D-Consistent Video Depth">
+  <!-- TODO: Same as description above -->
+  <meta property="og:description" content="GemDepth is a framework built on the insight that an explicit awareness of camera motion and global 3D structure is a prerequisite for 3D consistency.">
+  <!-- TODO: Replace with your actual website URL -->
+  <meta property="og:url" content="https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE">
+  <!-- TODO: Create a 1200x630px preview image and update path -->
+  <meta property="og:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="GemDepth: Geometry-Embedded Features for 3D-Consistent Video Depth - Research Preview">
+  <meta property="article:published_time" content="2024-01-01T00:00:00.000Z">
+  <meta property="article:author" content="Yuecheng Liu">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="video depth estimation">
+  <meta property="article:tag" content="monocular depth estimation">
+  <meta property="article:tag" content="3D reconstruction">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="GemDepth: Geometry-Embedded Features for 3D-Consistent Video Depth">
+  <meta name="citation_author" content="Yuecheng Liu">
+  <meta name="citation_author" content="Junda Cheng">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="ICML">
+  <meta name="citation_pdf_url" content="https://YOUR_DOMAIN.com/static/pdfs/paper.pdf">
+  
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+
+  <!-- TODO: Replace with your paper title and authors -->
+  <title>GemDepth: Geometry-Embedded Features for 3D-Consistent Video Depth - Yuecheng Liu, Junda Cheng, Longliang Liu, Wenjing Liao, Hanrui Cheng, Yuzhou Wang, Xin Yang | Academic Research</title>
+  
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="apple-touch-icon" href="static/images/favicon.ico">
+  
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+  
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+  
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "PAPER_TITLE",
+    "description": "BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS",
+    "author": [
+      {
+        "@type": "Person",
+        "name": "FIRST_AUTHOR_NAME",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "INSTITUTION_NAME"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "SECOND_AUTHOR_NAME",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "INSTITUTION_NAME"
+        }
+      }
+    ],
+    "datePublished": "2024-01-01",
+    "publisher": {
+      "@type": "Organization",
+      "name": "CONFERENCE_OR_JOURNAL_NAME"
+    },
+    "url": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE",
+    "image": "https://YOUR_DOMAIN.com/static/images/social_preview.png",
+    "keywords": ["KEYWORD1", "KEYWORD2", "KEYWORD3", "machine learning", "computer vision"],
+    "abstract": "FULL_ABSTRACT_TEXT_HERE",
+    "citation": "BIBTEX_CITATION_HERE",
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "mainEntity": {
+      "@type": "WebPage",
+      "@id": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE"
+    },
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "RESEARCH_AREA_1"
+      },
+      {
+        "@type": "Thing", 
+        "name": "RESEARCH_AREA_2"
+      }
+    ]
+  }
+  </script>
+  
+  <!-- Website/Organization Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "INSTITUTION_OR_LAB_NAME",
+    "url": "https://YOUR_INSTITUTION_WEBSITE.com",
+    "logo": "https://YOUR_DOMAIN.com/static/images/favicon.ico",
+    "sameAs": [
+      "https://twitter.com/YOUR_TWITTER_HANDLE",
+      "https://github.com/YOUR_GITHUB_USERNAME"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <main id="main-content">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <!-- TODO: Replace with your paper title -->
+            <h1 class="title is-1 publication-title">GemDepth: Geometry-Embedded Features for 3D-Consistent Video Depth</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- TODO: Replace with your paper authors and their personal links -->
+              <span class="author-block">
+                <a href="https://github.com/Yuecheng919" target="_blank">Yuecheng Liu</a><sup>1</sup>,</span>
+                <span class="author-block">
+                  <a href="https://github.com/Junda24" target="_blank">Junda Cheng</a><sup>1*</sup>,</span>
+                  <span class="author-block">
+                    <span class="author-block">
+                      <a href="https://github.com/waldeinsamkeits" target="_blank">Wenjing Liao</a><sup>1,2</sup>,</span>
+                      <span class="author-block">
+                        <a href="https://github.com/MarcelRay0312" target="_blank">Hanrui Cheng</a><sup>1,2</sup>,</span>
+                        <span class="author-block">
+                          <span class="author-block">
+                            <a href="https://github.com/YuzhouWang999" target="_blank">Yuzhou Wang</a><sup>1</sup>,</span>
+                            <span class="author-block">
+                              <a href="https://sites.google.com/view/xinyang/home" target="_blank">Xin Yang</a><sup>1,3</sup>,</span>
+                  </span>
+                  </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <!-- TODO: Replace with your institution and conference/journal info -->
+                    <span class="author-block">Hust<br></span>
+                    <span class="author-block">Carizon<br></span>
+                    <span class="author-block">Optics Valley Laboratory<br></span>
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                         <!-- TODO: Update with your arXiv paper ID -->
+                      <span class="link-block">
+                        <a href="https://arxiv.org/pdf/2605.10525" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+
+                  <!-- TODO: Replace with your GitHub repository URL -->
+                  <span class="link-block">
+                    <a href="https://github.com/Yuecheng919/GemDepth" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- TODO: Update with your arXiv paper ID -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2605.10525" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <!-- TODO: Replace with your paper abstract -->
+          <p>
+            Video depth estimation extends monocular prediction into the temporal domain to ensure coherence. However, existing methods often suffer from spatial blurring in fine-detail regions and temporal inconsistencies. We argue that current approaches, which primarily rely on temporal smoothing via Transformers, struggle to maintain strict 3D geometric consistency-particularly under rotations or drastic view changes. To address this, we propose GemDepth, a framework built on the insight that an explicit awareness of camera motion and global 3D structure is a prerequisite for 3D consistency. Distinctively, GemDepth introduces a Geometry-Embedding Module (GEM) that predicts inter-frame camera poses to generate implicit geometric embeddings. This injection of motion priors equips the network with intrinsic 3D perception and alignment capabilities. Guided by these geometric cues, our Alternating Spatio-Temporal Transformer (ASTT) captures latent point-level correspondences to simultaneously enhance spatial precision for sharp details and enforce rigorous temporal consistency. Furthermore, GemDepth employs a data-efficient training strategy, effectively bridging the gap between high efficiency and robust geometric consistency. As shown in Fig.2, comprehensive evaluations demonstrate that GemDepth achieves state-of-the-art performance across multiple datasets, particularly in complex dynamic scenarios.
+            class="external-link button is-normal is-rounded is-dark">.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-justified">
+          
+          <img src="static/images/network.png" alt="GemDepth Pipeline" style="width: 100%; margin-bottom: 20px; border-radius: 10px;">
+          
+          <p>
+            <strong>Overview of GemDepth Framework.</strong> GemDepth is a framework built on the insight that an explicit awareness of camera motion and global 3D structure is a prerequisite for 3D consistency. Distinctively, GemDepth introduces a Geometry-Embedding Module (GEM) that predicts inter-frame camera poses to generate implicit geometric embeddings. This injection of motion priors equips the network with intrinsic 3D perception and alignment capabilities. Guided by these geometric cues, our Alternating Spatio-Temporal Transformer (ASTT) captures latent point-level correspondences to simultaneously enhance spatial precision for sharp details and enforce rigorous temporal consistency. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Qualitative Results</h2>
+          <div class="content has-text-justified">
+  
+            <div class="columns is-vcentered" style="margin-top: 20px;"> 
+              <div class="column is-half">
+                <img src="static/images/image9.gif" alt="GemDepth" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <p class="has-text-centered is-size-5 has-text-weight-bold" style="margin-top: 10px;">GemDepth</p>
+              </div>
+              <div class="column is-half">
+                <img src="static/images/image10.gif" alt="VideoDepthAnything" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <p class="has-text-centered is-size-5 has-text-weight-bold" style="margin-top: 10px;">VideoDepthAnything</p>
+              </div>
+            </div>
+            
+            <div class="columns is-vcentered" style="margin-top: 20px;"> 
+              <div class="column is-half">
+                <img src="static/images/image11.gif" alt="GemDepth Set 2" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <p class="has-text-centered is-size-5 has-text-weight-bold" style="margin-top: 10px;">GemDepth</p>
+              </div>
+              <div class="column is-half">
+                <img src="static/images/image12.gif" alt="VideoDepthAnything Set 2" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <p class="has-text-centered is-size-5 has-text-weight-bold" style="margin-top: 10px;">VideoDepthAnything</p>
+              </div>
+            </div>
+            
+            <div style="margin-top: 50px;">
+              <img src="static/images/image13.GIF" alt="Pointcloud Comparison on Scannet" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+              <p class="has-text-centered is-size-5 has-text-weight-bold" style="margin-top: 10px;">Pointcloud Comparison on Scannet</p>
+            </div>
+  
+            <div style="margin-top: 40px;">
+              <img src="static/images/image15.GIF" alt="Pointcloud Comparison on Bonn" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+              <p class="has-text-centered is-size-5 has-text-weight-bold" style="margin-top: 10px;">Pointcloud Comparison on Bonn</p>
+            </div>
+  
+            <div style="margin-top: 40px;">
+              <img src="static/images/image17.GIF" alt="Pointcloud Comparison on KITTI" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+              <p class="has-text-centered is-size-5 has-text-weight-bold" style="margin-top: 10px;">Pointcloud Comparison on KITTI</p>
+            </div>
+            
+            <p style="margin-top: 20px;">
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Quantitative Evaluation</h2>
+          <div class="content has-text-justified">
+            <p>
+              <strong>Quantitative results on standard benchmarks.</strong> We evaluate GemDepth across zero-shot depth estimation, temporal consistency, and 3D geometric accuracy. Our method consistently achieves state-of-the-art performance, demonstrating robust generalization and superior geometric fidelity.
+            </p>
+  
+            <h3 class="title is-5" style="margin-top: 30px;">1. Zero-shot Depth Estimation</h3>
+            <div class="table-container" style="margin-top: 15px;">
+              <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth" style="text-align: center;">
+                <thead>
+                  <tr>
+                    <th rowspan="2" style="text-align: center; vertical-align: middle;">Method</th>
+                    <th colspan="2" style="text-align: center;">Sintel (~50 frames)</th>
+                    <th colspan="2" style="text-align: center;">Bonn (500 frames)</th>
+                    <th colspan="2" style="text-align: center;">Scannet (500 frames)</th>
+                    <th colspan="2" style="text-align: center;">KITTI (500 frames)</th>
+                    <th rowspan="2" style="text-align: center; vertical-align: middle;">Runtime (ms)</th>
+                  </tr>
+                  <tr>
+                    <th style="text-align: center;">AbsRel↓</th>
+                    <th style="text-align: center;">δ₁↑</th>
+                    <th style="text-align: center;">AbsRel↓</th>
+                    <th style="text-align: center;">δ₁↑</th>
+                    <th style="text-align: center;">AbsRel↓</th>
+                    <th style="text-align: center;">δ₁↑</th>
+                    <th style="text-align: center;">AbsRel↓</th>
+                    <th style="text-align: center;">δ₁↑</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>NVDS</td>
+                    <td>0.408</td>
+                    <td>0.464</td>
+                    <td>0.199</td>
+                    <td>0.674</td>
+                    <td>0.207</td>
+                    <td>0.628</td>
+                    <td>0.233</td>
+                    <td>0.614</td>
+                    <td>258</td>
+                  </tr>
+                  <tr>
+                    <td>ChronoDepth</td>
+                    <td>0.192</td>
+                    <td>0.673</td>
+                    <td>0.199</td>
+                    <td>0.665</td>
+                    <td>0.169</td>
+                    <td>0.665</td>
+                    <td>0.243</td>
+                    <td>0.576</td>
+                    <td>617</td>
+                  </tr>
+                  <tr>
+                    <td>DepthCrafter</td>
+                    <td>0.299</td>
+                    <td>0.695</td>
+                    <td>0.153</td>
+                    <td>0.803</td>
+                    <td>0.169</td>
+                    <td>0.730</td>
+                    <td>0.164</td>
+                    <td>0.753</td>
+                    <td>980</td>
+                  </tr>
+                  <tr>
+                    <td>RollingDepth</td>
+                    <td>0.417</td>
+                    <td>0.375</td>
+                    <td>0.088</td>
+                    <td>0.931</td>
+                    <td>0.102</td>
+                    <td>0.901</td>
+                    <td>0.107</td>
+                    <td>0.887</td>
+                    <td>280</td>
+                  </tr>
+                  <tr>
+                    <td>DepthAnythingV2</td>
+                    <td>0.390</td>
+                    <td>0.541</td>
+                    <td>0.127</td>
+                    <td>0.864</td>
+                    <td>0.150</td>
+                    <td>0.768</td>
+                    <td>0.137</td>
+                    <td>0.815</td>
+                    <td style="background-color: #FFD0D0; font-weight: bold;">79</td>
+                  </tr>
+                  <tr>
+                    <td>VideoDepthAnything</td>
+                    <td>0.295</td>
+                    <td>0.644</td>
+                    <td>0.071</td>
+                    <td>0.959</td>
+                    <td>0.089</td>
+                    <td>0.926</td>
+                    <td>0.083</td>
+                    <td>0.944</td>
+                    <td style="background-color: #FFFFD0; font-weight: bold;">85</td>
+                  </tr>
+                  <tr style="background-color: #f5f5f5;">
+                    <td style="font-weight: bold;">GemDepth-DAV2(Ours)</td>
+                    <td style="background-color: #FFFFD0; font-weight: bold;">0.188</td>
+                    <td style="background-color: #FFFFD0; font-weight: bold;">0.812</td>
+                    <td style="background-color: #FFFFD0; font-weight: bold;">0.055</td>
+                    <td style="background-color: #FFFFD0; font-weight: bold;">0.970</td>
+                    <td style="background-color: #FFFFD0; font-weight: bold;">0.069</td>
+                    <td style="background-color: #FFFFD0; font-weight: bold;">0.959</td>
+                    <td style="background-color: #FFD0D0; font-weight: bold;">0.077</td>
+                    <td style="background-color: #FFFFD0; font-weight: bold;">0.950</td>
+                    <td>94</td>
+                  </tr>
+                  <tr style="background-color: #f5f5f5;">
+                    <td style="font-weight: bold;">GemDepth-VDA(Ours)</td>
+                    <td style="background-color: #FFD0D0; font-weight: bold;">0.157</td>
+                    <td style="background-color: #FFD0D0; font-weight: bold;">0.827</td>
+                    <td style="background-color: #FFD0D0; font-weight: bold;">0.051</td>
+                    <td style="background-color: #FFD0D0; font-weight: bold;">0.978</td>
+                    <td style="background-color: #FFD0D0; font-weight: bold;">0.066</td>
+                    <td style="background-color: #FFD0D0; font-weight: bold;">0.967</td>
+                    <td style="background-color: #FFFFD0; font-weight: bold;">0.071</td>
+                    <td style="background-color: #FFD0D0; font-weight: bold;">0.955</td>
+                    <td>99</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+  
+            <h3 class="title is-5" style="margin-top: 40px;">Temporal Consistency</h3>
+            <div class="table-container" style="margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto;">
+              <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth" style="text-align: center;">
+                <thead>
+                  <tr>
+                    <th style="text-align: center;">Method</th>
+                    <th style="text-align: center;">DepthAnythingV2</th>
+                    <th style="text-align: center;">RollingDepth</th>
+                    <th style="text-align: center;">VideoDepthAnything</th>
+                    <th style="text-align: center;">GemDepth-DAV2</th>
+                    <th style="text-align: center;">GemDepth-VDA</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>TAE ↓</td>
+                    <td>1.14</td>
+                    <td>0.65</td>
+                    <td>0.57</td>
+                    <td style="font-weight: bold; background-color: #f5f5f5;">0.50</td>
+                    <td style="font-weight: bold; text-decoration: underline; background-color: #f5f5f5;">0.47</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+  
+            <h3 class="title is-5" style="margin-top: 40px;">2. 3D Geometric Accuracy</h3>
+            <div class="table-container" style="margin-top: 15px;">
+              <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth" style="text-align: center;">
+                <thead>
+                  <tr>
+                    <th rowspan="2" style="text-align: center; vertical-align: middle;">Method</th>
+                    <th rowspan="2" style="text-align: center; vertical-align: middle;">Params</th>
+                    <th colspan="4" style="text-align: center;">Scannet</th>
+                    <th colspan="4" style="text-align: center;">Sintel</th>
+                    <th colspan="4" style="text-align: center;">Bonn</th>
+                  </tr>
+                  <tr>
+                    <th style="text-align: center;">ATE ↓</th>
+                    <th style="text-align: center;">F1 ↑</th>
+                    <th style="text-align: center;">AbsRel ↓</th>
+                    <th style="text-align: center;">TAE ↓</th>
+                    <th style="text-align: center;">ATE ↓</th>
+                    <th style="text-align: center;">F1 ↑</th>
+                    <th style="text-align: center;">AbsRel ↓</th>
+                    <th style="text-align: center;">TAE ↓</th>
+                    <th style="text-align: center;">ATE ↓</th>
+                    <th style="text-align: center;">F1 ↑</th>
+                    <th style="text-align: center;">AbsRel ↓</th>
+                    <th style="text-align: center;">TAE ↓</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>VGGT</td>
+                    <td>1.10B</td>
+                    <td style="font-weight: bold;">0.02</td>
+                    <td>65.46</td>
+                    <td>0.13</td>
+                    <td>1.92</td>
+                    <td style="font-weight: bold;">0.02</td>
+                    <td>70.47</td>
+                    <td>0.55</td>
+                    <td style="font-weight: bold;">1.18</td>
+                    <td style="font-weight: bold;">0.02</td>
+                    <td>76.58</td>
+                    <td>0.20</td>
+                    <td>2.38</td>
+                  </tr>
+                  <tr>
+                    <td>DA3</td>
+                    <td>1.19B</td>
+                    <td style="font-weight: bold;">0.02</td>
+                    <td>65.91</td>
+                    <td>0.11</td>
+                    <td>1.12</td>
+                    <td style="font-weight: bold;">0.02</td>
+                    <td>71.91</td>
+                    <td>0.38</td>
+                    <td>1.37</td>
+                    <td style="font-weight: bold;">0.02</td>
+                    <td>78.44</td>
+                    <td>0.18</td>
+                    <td>2.87</td>
+                  </tr>
+                  <tr style="font-weight: bold; background-color: #f5f5f5;">
+                    <td>GemDepth(Ours)</td>
+                    <td>0.58B</td>
+                    <td>0.03</td>
+                    <td style="font-weight: bold;">69.01</td>
+                    <td style="font-weight: bold;">0.07</td>
+                    <td style="font-weight: bold;">0.47</td>
+                    <td>0.03</td>
+                    <td style="font-weight: bold;">72.66</td>
+                    <td style="font-weight: bold;">0.16</td>
+                    <td>0.84</td>
+                    <td>0.03</td>
+                    <td style="font-weight: bold;">90.43</td>
+                    <td style="font-weight: bold;">0.05</td>
+                    <td style="font-weight: bold;">2.03</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- End paper abstract -->
+
+<!--BibTex citation -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <div class="bibtex-header">
+      <h2 class="title">BibTeX</h2>
+      <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+        <i class="fas fa-copy"></i>
+        <span class="copy-text">Copy</span>
+      </button>
+    </div>
+    <pre id="bibtex-code"><code>@article{cheng2026gemdepth,
+      title={GemDepth: Geometry-Embedded Features for 3D-Consistent Video Depth},
+      author={Cheng, Yuecheng LiulJunda and Liu, Longliang and Liao, Wenjing and Cheng, Hanrui and Wang, Yuzhou and Yang, Xin},
+      journal={arXiv preprint arXiv:2605.10525},
+      year={2026}
+    }</code></pre>
+  </div>
+</section>
+<!--End BibTex citation -->
+
+  </body>
+  </html>
